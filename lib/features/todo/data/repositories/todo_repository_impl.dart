@@ -10,7 +10,7 @@ class TodoRepositoryImpl extends TodoRepository {
   TodoRepositoryImpl(this.todoDataSource);
 
   @override
-  Future<List<TodoItemModel>> getLocations() {
+  Future<List<TodoItemModel>> getTodoList() {
     try {
       return todoDataSource.getTodoItems();
     } catch (e) {
