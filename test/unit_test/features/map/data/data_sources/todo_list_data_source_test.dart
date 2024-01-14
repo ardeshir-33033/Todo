@@ -8,7 +8,7 @@ import 'package:mockito/mockito.dart';
 import '../../../../../fixtures/t_location_model.dart';
 import 'location_data_source_test.mocks.dart';
 
-@GenerateMocks([TodoListDataSource])
+// @GenerateMocks([TodoListDataSource])
 void main() {
   late TodoListDataSource dataSource;
 
@@ -31,9 +31,9 @@ void main() {
         when(dataSource.getLocations())
             .thenAnswer((realInvocation) => testDataController.stream);
         //act
-        final result = dataSource.getLocations();
+        final result = dataSource.getTodoList();
         //assert
-        verify(dataSource.getLocations());
+        verify(dataSource.getTodoList());
         expect(result, equals(testDataController.stream));
       },
     );
@@ -42,7 +42,7 @@ void main() {
       'should return Exception when get location is not successful',
       () async {
         //arrange
-        when(dataSource.getLocations()).thenThrow(Exception());
+        when(dataSource.getTodoList()).thenThrow(Exception());
         //act
         final call = dataSource.getLocations;
         //assert
