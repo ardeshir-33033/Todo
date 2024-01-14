@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:map_ws/core/base/environment.dart';
 import 'package:map_ws/features/map/data/data_sources/location_data_source.dart';
-import 'package:map_ws/features/map/data/repositories/locations_repository_impl.dart';
+import 'package:map_ws/features/map/data/repositories/todo_repository_impl.dart';
 import 'package:map_ws/features/map/domain/repositories/locations_repository.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
