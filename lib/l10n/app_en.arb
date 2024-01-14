@@ -1,0 +1,5 @@
+{
+  "simpleErrorCode": "Please try again later",
+  "instruction": "Have you run the local local app? since during implementation of this code the provided websocket was not working i created a local program that you can run in a computer and when you run the app in a emulator you can see changes",
+  "schedule": "Schedule"
+}
