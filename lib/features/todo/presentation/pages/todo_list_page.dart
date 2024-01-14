@@ -15,7 +15,7 @@ class _TodoListPageState extends State<TodoListPage> {
   ApiHandler api = ApiHandlerImpl();
   @override
   void initState() {
-    var res = TodoListSourceImpl(api).getTodoItems();
+    var res = TodoListDataSourceImpl(api).getTodoItems();
     print(res);
     super.initState();
   }
@@ -23,10 +23,11 @@ class _TodoListPageState extends State<TodoListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(tr(context).schedule),
       ),
-      body: Column(
+      body: const Column(
         children: [
           Divider(),
           SizedBox(height: 100, child: LinearCalendar()),

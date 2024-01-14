@@ -1,20 +1,26 @@
 part of 'todo_list_bloc.dart';
 
-@immutable
 abstract class TodoListEvent {
-  const TodoListEvent();
+  DateTime? selectedDate;
+
+  TodoListEvent({DateTime? selectedDate})
+      : selectedDate = selectedDate ?? DateTime.now();
 }
 
-final class TodoListEventLoading extends TodoListEvent {
-  const TodoListEventLoading();
+class TodoListEventLoading extends TodoListEvent {
+  TodoListEventLoading({DateTime? selectedDate})
+      : super(selectedDate: selectedDate);
 }
 
-final class TodoListEventSuccessful extends TodoListEvent {
+class TodoListEventSuccessful extends TodoListEvent {
   final List<TodoItemEntity> todoList;
-  const TodoListEventSuccessful(this.todoList);
+
+  TodoListEventSuccessful({required this.todoList, DateTime? selectedDate})
+      : super(selectedDate: selectedDate);
 }
 
 final class TodoListEventFailure extends TodoListEvent {
   final String errorCode;
-  const TodoListEventFailure(this.errorCode);
+  TodoListEventFailure({required this.errorCode, DateTime? selectedDate})
+      : super(selectedDate: selectedDate);
 }

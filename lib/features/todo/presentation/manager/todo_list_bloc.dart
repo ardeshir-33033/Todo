@@ -10,9 +10,9 @@ part 'todo_list_state.dart';
 class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
   final GetTodoListUseCase getTodoListUseCase;
 
-  TodoListBloc(this.getTodoListUseCase) : super(const TodoListInitial()) {
+  TodoListBloc(this.getTodoListUseCase) : super(TodoListInitial(null)) {
     on<TodoListEvent>((event, emit) {
-      emit(const TodoListLoading());
+      emit(TodoListLoading(null));
     });
     on<TodoListEventLoading>(_onTodoListLoading);
     on<TodoListEventSuccessful>(_onSocketSuccessful);
@@ -21,21 +21,29 @@ class TodoListBloc extends Bloc<TodoListEvent, TodoListState> {
 
   void _onTodoListLoading(
       TodoListEventLoading event, Emitter<TodoListState> emit) async {
-    emit(const TodoListLoading());
+    emit(TodoListLoading(event.selectedDate));
     try {
       List<TodoItemEntity> todoList = await getTodoListUseCase(null);
-      add(TodoListEventSuccessful(todoList));
+      add(TodoListEventSuccessful(
+          todoList: todoList, selectedDate: event.selectedDate));
     } catch (e) {
-      add(TodoListEventFailure(e.toString()));
+      add(TodoListEventFailure(
+          errorCode: e.toString(), selectedDate: event.selectedDate));
     }
   }
 
   void _onSocketSuccessful(
       TodoListEventSuccessful event, Emitter<TodoListState> emit) {
-    emit(TodoListSuccess(event.todoList));
+    emit(TodoListSuccess(
+        todoList: event.todoList, selectedDate: event.selectedDate));
   }
 
   void _onSocketError(TodoListEventFailure event, Emitter<TodoListState> emit) {
-    emit(TodoListError(event.errorCode));
+    emit(TodoListError(
+        errorMessage: event.errorCode, selectedDate: event.selectedDate));
+  }
+
+  selectDate(DateTime selectedDateTime) {
+    add(TodoListEventLoading(selectedDate: selectedDateTime));
   }
 }

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_list/core/extenstions/date_time_extensions.dart';
+import 'package:todo_list/features/todo/presentation/manager/todo_list_bloc.dart';
+import 'package:todo_list/locator.dart';
 
 class LinearCalendar extends StatelessWidget {
   const LinearCalendar({super.key});
@@ -8,22 +12,32 @@ class LinearCalendar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        child: PageView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: 14 ~/ 7,
-          itemBuilder: (context, index) {
-            DateTime currentDate = DateTime.now().add(Duration(days: index));
+        child:
+            BlocBuilder<TodoListBloc, TodoListState>(builder: (context, state) {
+          return PageView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: 14 ~/ 7,
+            itemBuilder: (context, index) {
+              DateTime currentDate =
+                  DateTime.now().add(Duration(days: index * 7));
+              DateTime selectedDate = state.selectedDate;
 
-            return WeekPage(startDate: currentDate);
-          },
-        ));
+              return WeekPage(
+                startDate: currentDate,
+                selectedDate: selectedDate,
+              );
+            },
+          );
+        }));
   }
 }
 
 class WeekPage extends StatelessWidget {
   final DateTime startDate;
+  final DateTime selectedDate;
 
-  const WeekPage({super.key, required this.startDate});
+  const WeekPage(
+      {super.key, required this.startDate, required this.selectedDate});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +48,7 @@ class WeekPage extends StatelessWidget {
         return Expanded(
           child: DateCard(
             date: currentDate,
-            isSelected: true,
+            isSelected: selectedDate.isSameDate(currentDate),
           ),
         );
       }),
@@ -50,33 +64,37 @@ class DateCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70,
-      alignment: Alignment.center,
-      margin: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        color: isSelected ? Colors.green : Colors.white,
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            DateFormat('EEE').format(date),
-            style: TextStyle(
-              color: isSelected ? Colors.white : Colors.black54,
-              fontWeight: FontWeight.bold,
-              fontSize: 10.0,
+    return InkWell(
+      onTap: () {
+        locator<TodoListBloc>().selectDate(date);
+      },
+      child: Container(
+        height: 70,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.green : Colors.white,
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              DateFormat('EEE').format(date),
+              style: TextStyle(
+                color: isSelected ? Colors.white : Colors.black54,
+                fontWeight: FontWeight.bold,
+                fontSize: 10.0,
+              ),
             ),
-          ),
-          Text(
-            '${date.day}',
-            style: TextStyle(
-              color: isSelected ? Colors.white : Colors.black54,
-              fontSize: 10.0,
+            Text(
+              '${date.day}',
+              style: TextStyle(
+                color: isSelected ? Colors.white : Colors.black54,
+                fontSize: 10.0,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
