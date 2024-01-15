@@ -4,6 +4,7 @@ import 'package:todo_list/core/base_routing/environment.dart';
 import 'package:todo_list/features/todo/presentation/manager/todo_list_bloc.dart';
 import 'package:todo_list/features/todo/presentation/pages/todo_list_page.dart';
 import 'package:todo_list/l10n/l10n.dart';
+// ignore: depend_on_referenced_packages
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:todo_list/locator.dart';

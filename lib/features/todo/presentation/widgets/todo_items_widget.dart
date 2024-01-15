@@ -61,7 +61,7 @@ class _TodoItemWidgetState extends State<TodoItemWidget> {
                 valueListenable: isSelected,
                 builder: (context, _, child) {
                   return Checkbox(
-                      value: widget.todoItem.isSelected ?? false,
+                      value: widget.todoItem.isSelected,
                       shape: const CircleBorder(),
                       activeColor: Colors.transparent,
                       checkColor: Colors.white,

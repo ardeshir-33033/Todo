@@ -21,7 +21,6 @@ class _CustomLoadingAnimationState extends State<CustomLoadingAnimation>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 4));

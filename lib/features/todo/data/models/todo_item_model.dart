@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:todo_list/features/todo/domain/entities/todo_item_entity.dart';
 
