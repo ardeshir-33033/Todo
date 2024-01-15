@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:todo_list/features/todo/domain/entities/todo_item_entity.dart';
 import 'package:todo_list/features/todo/domain/use_cases/get_todo_list_usecase.dart';
 

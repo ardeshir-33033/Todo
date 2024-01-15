@@ -1,44 +1,43 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:map_ws/features/map/presentation/manager/locations_bloc.dart';
+import 'package:todo_list/features/todo/presentation/manager/todo_list_bloc.dart';
 
-import '../../domain/use_cases/get_locations_usecase_test.mocks.dart';
+import '../../domain/use_cases/get_todo_list_usecase_test.mocks.dart';
 
 main() {
-  group('Location Bloc', () {
-    late LocationsBloc locationsBloc;
-    late MockGetLocationsUseCase getLocationsUseCase;
+  group('Todo List Bloc', () {
+    late TodoListBloc todoListBloc;
+    late MockGetTodoListUseCase mockGetTodoListUseCase;
 
     setUpAll(() {
       EquatableConfig.stringify = true;
-      getLocationsUseCase = MockGetLocationsUseCase();
-      locationsBloc = LocationsBloc(getLocationsUseCase);
+      mockGetTodoListUseCase = MockGetTodoListUseCase();
+      todoListBloc = TodoListBloc(mockGetTodoListUseCase);
     });
 
-    LocationsBloc buildBloc() {
-      return LocationsBloc(getLocationsUseCase);
+    TodoListBloc buildBloc() {
+      return TodoListBloc(mockGetTodoListUseCase);
     }
 
-    test('Initial state of LocationsBloc is Location Initial', () {
-      expect(locationsBloc.state, const LocationsInitial());
+    test('Initial state of TodoList Bloc is TodoListInitial', () {
+      expect(todoListBloc.state, TodoListInitial(null));
     });
 
-    blocTest<LocationsBloc, LocationsState>(
+    blocTest<TodoListBloc, TodoListState>(
       'emits  when nothing is done',
-      build: () => locationsBloc,
+      build: () => todoListBloc,
       expect: () => [],
     );
-
-    blocTest<LocationsBloc, LocationsState>(
-        'The LocationBloc should emit a LocationsLoading()',
+    //
+    blocTest<TodoListBloc, TodoListState>(
+        'The TodoListBloc should emit a TodoListLoading after TodoListEventLoading Event',
         build: buildBloc,
-        act: (bloc) => bloc.add(const LocationSocketLoading()),
-        expect: () =>
-            [const LocationsLoading(), const LocationsError("errorMessage")]);
+        act: (bloc) => bloc.add(TodoListEventLoading()),
+        expect: () => [TodoListLoading(null), TodoListError(errorMessage: "")]);
 
     tearDown(() {
-      locationsBloc.close();
+      todoListBloc.close();
     });
   });
 }
