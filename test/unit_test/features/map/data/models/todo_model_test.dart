@@ -1,10 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:map_ws/features/map/data/models/location_model.dart';
-import 'package:map_ws/features/map/domain/entities/location_entity.dart';
-import '../../../../../fixtures/fixture_reader.dart';
-import '../../../../../fixtures/t_location_model.dart';
 
 void main() {
   final tLocationModel = TestModels.testModelForLocation;
@@ -23,7 +19,7 @@ void main() {
       () async {
         //arrange
         final Map<String, dynamic> jsonMap =
-            json.decode(fixture("location_model_test.json"));
+            json.decode(fixture("todo_model_test.json"));
         //act
         LocationModel result = LocationModel.fromJson(jsonMap);
         //assert

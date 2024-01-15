@@ -4,7 +4,7 @@ import 'package:map_ws/features/map/data/models/location_model.dart';
 import 'package:map_ws/features/map/domain/use_cases/get_locations_usecase.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import '../../../../../fixtures/t_location_model.dart';
+import '../../../../../fixtures/t_todo_model.dart';
 import '../repositories/location_repository_test.mocks.dart';
 
 // @GenerateMocks([GetLocationsUseCase])

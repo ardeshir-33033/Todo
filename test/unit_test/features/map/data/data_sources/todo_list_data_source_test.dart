@@ -5,7 +5,7 @@ import 'package:map_ws/core/base/environment.dart';
 import 'package:map_ws/features/map/data/data_sources/location_data_source.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import '../../../../../fixtures/t_location_model.dart';
+import '../../../../../fixtures/t_todo_model.dart';
 import 'location_data_source_test.mocks.dart';
 
 // @GenerateMocks([TodoListDataSource])
