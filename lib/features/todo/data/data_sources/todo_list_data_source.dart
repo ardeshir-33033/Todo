@@ -7,10 +7,10 @@ abstract class TodoDataSource {
   Future<List<TodoItemModel>> getTodoItems();
 }
 
-class TodoListDataSourceImpl extends TodoDataSource {
+class TodoDataSourceImpl extends TodoDataSource {
   final ApiHandler api;
 
-  TodoListDataSourceImpl(this.api);
+  TodoDataSourceImpl(this.api);
 
   @override
   Future<List<TodoItemModel>> getTodoItems() async {

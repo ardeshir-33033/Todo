@@ -26,5 +26,5 @@ void setup() {
 
   // *----- Data Source -----*
   locator.registerLazySingleton<TodoDataSource>(
-      () => TodoListDataSourceImpl(locator()));
+      () => TodoDataSourceImpl(locator()));
 }
