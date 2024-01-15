@@ -72,7 +72,7 @@ class DateCard extends StatelessWidget {
         height: 70,
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          color: isSelected ? Colors.green : Colors.white,
+          color: isSelected ? Colors.green.withOpacity(0.7) : Colors.white,
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Column(

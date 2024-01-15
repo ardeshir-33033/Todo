@@ -119,7 +119,7 @@ class __$$TodoItemModelImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$TodoItemModelImpl implements _TodoItemModel {
-  const _$TodoItemModelImpl({this.time, this.text, this.color});
+  _$TodoItemModelImpl({this.time, this.text, this.color});
 
   factory _$TodoItemModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TodoItemModelImplFromJson(json);
@@ -164,14 +164,11 @@ class _$TodoItemModelImpl implements _TodoItemModel {
   }
 
   @override
-  set color(String? _color) {
-    // TODO: implement color
-  }
+  bool isSelected = false;
 
   @override
-  List<TodoItemModel> listFromJson2(json) {
-    // TODO: implement listFromJson2
-    throw UnimplementedError();
+  set color(String? _color) {
+    // TODO: implement color
   }
 
   @override
@@ -186,7 +183,7 @@ class _$TodoItemModelImpl implements _TodoItemModel {
 }
 
 abstract class _TodoItemModel implements TodoItemModel {
-  const factory _TodoItemModel(
+  factory _TodoItemModel(
       {final String? time,
       final String? text,
       final String? color}) = _$TodoItemModelImpl;
