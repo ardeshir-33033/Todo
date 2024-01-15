@@ -1,39 +1,36 @@
-import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:map_ws/features/map/data/models/location_model.dart';
-import 'package:map_ws/features/map/domain/use_cases/get_locations_usecase.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:todo_list/core/base_routing/environment.dart';
+import 'package:todo_list/features/todo/domain/use_cases/get_todo_list_usecase.dart';
 import '../../../../../fixtures/t_todo_model.dart';
-import '../repositories/location_repository_test.mocks.dart';
+import '../../data/repositories/todo_repository_impl_test.mocks.dart';
 
-// @GenerateMocks([GetLocationsUseCase])
+@GenerateMocks([GetTodoListUseCase])
 void main() {
-  late GetLocationsUseCase getUseCase;
-  late MockLocationsRepository mockLocationsRepository;
-  setUpAll(() {
-    mockLocationsRepository = MockLocationsRepository();
-    getUseCase = GetLocationsUseCase(mockLocationsRepository);
+  late GetTodoListUseCase getUseCase;
+  late MockTodoRepository mockTodoRepository;
+
+  setUpAll(() async {
+    await Environment.initEnvironment();
+
+    mockTodoRepository = MockTodoRepository();
+    getUseCase = GetTodoListUseCase(mockTodoRepository);
   });
 
-  final tLocationList = TestModels.testModelForLocation;
-
-  final StreamController<LocationModel> testDataController =
-      StreamController<LocationModel>();
-  testDataController.add(tLocationList);
+  final tTodoList = [TestModels.testModelForTodoItem];
 
   test(
-    'should get all locations from user repository',
+    'should get todo list from repository',
     () async {
       //arrange
-      when(mockLocationsRepository.getLocations())
-          .thenAnswer((_) => testDataController.stream);
+      when(mockTodoRepository.getTodoList()).thenAnswer((_) async => tTodoList);
       //act
-      final result = getUseCase(null);
+      final result = await getUseCase(null);
       //assert
-      expect(result, testDataController.stream);
-      verify(mockLocationsRepository.getLocations());
-      verifyNoMoreInteractions(mockLocationsRepository);
+      expect(result, tTodoList);
+      verify(mockTodoRepository.getTodoList());
+      verifyNoMoreInteractions(mockTodoRepository);
     },
   );
 }

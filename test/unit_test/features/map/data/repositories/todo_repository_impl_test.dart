@@ -1,10 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:todo_list/core/base_routing/environment.dart';
 import 'package:todo_list/features/todo/data/repositories/todo_repository_impl.dart';
+import 'package:todo_list/features/todo/domain/repositories/todo_repository.dart';
 import '../../../../../fixtures/t_todo_model.dart';
 import '../data_sources/todo_list_data_source_test.mocks.dart';
 
+@GenerateMocks([TodoRepository])
 void main() {
   late MockTodoDataSource mockTodoDataSource;
   late TodoRepositoryImpl repository;
