@@ -1,16 +1,33 @@
-# todo_list
 
-A new Flutter project.
+# ToDo App
 
-## Getting Started
+The challenge for Todo app in Flutter.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Clean Architecture 
+- TDD
+- Bloc
+- Unit Tests
+- Integration Tests
+- SOLID
+- Service Locator
+- Dio
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Running Tests
+
+To run project tests you can use the provided Shell files in the project.
+
+OR
+
+Integration test
+```bash
+  flutter test integration_test
+```
+Unit test
+```bash
+  flutter test
+```
+
